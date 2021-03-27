@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>The Bird Quiz</title>
+</head>
+<body>
+    <header>
+        <a href="#" id="viewScore">View High Scores</a>
+        <div id="timer">Timer here</div>
+    </header>
+    <main>
+        <section class="mainBox" id="startBox">
+            <h1 id="quizTitle">The Bird Quiz</h1>
+            <p>
+                How familiar are you with our Avian friends? Find out by trying this quiz. No need to research, just wing it!
+            </p>
+            <button class="btn" id="startBtn">Start</button>
+        </section>
+
+        <section class="mainBox" id="quizBox">
+            <h2 id="quizQ">Quiz Question</h2>
+            <ul id="questOpts">
+                <li class="opt" id="opt1">Option 1</li>
+                <li class="opt" id="opt2">Option 2</li>
+                <li class="opt" id="opt3">Option 3</li>
+                <li class="opt" id="opt4">Option 4</li>
+            </ul>
+        </section>
+
+        <section class="mainBox" id="allDoneBox">
+            <h2 id="allDoneH">All done!</h2>
+            <p id="results">
+                Your final score is: 
+            </p>
+            <form id="initForm">
+            <label for="enterInit">Enter Initials:</label>
+            <input type="text" name="enterInit" id="enterInit">
+            </form>
+        </section>
+
+        <section class="mainBox" id="highScoreBox">
+            <h2 id="highScoreT">High Scores:</h2>
+            <ul id="highScoreL">
+            
+            </ul>
+            <button class="btn" id="goBack">Go Back</button>
+            <button class="btn" id="clearHS">Clear High Scores</button>
+        </section>
+
+
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>
