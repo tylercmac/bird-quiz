@@ -25,11 +25,8 @@
         <section class="mainBox" id="quizBox">
             <h2 id="quizQ">Quiz Question</h2>
             <ul id="questOpts">
-                <li class="opt" id="opt1">Option 1</li>
-                <li class="opt" id="opt2">Option 2</li>
-                <li class="opt" id="opt3">Option 3</li>
-                <li class="opt" id="opt4">Option 4</li>
             </ul>
+            <div id='rightOrWrong'>text goes here</div>
         </section>
 
         <section class="mainBox" id="allDoneBox">
@@ -38,8 +35,8 @@
                 Your final score is: 
             </p>
             <form id="initForm">
-            <label for="enterInit">Enter Initials:</label>
-            <input type="text" name="enterInit" id="enterInit">
+                <label for="enterInit">Enter Initials:</label>
+                <input type="text" name="enterInit" id="enterInit" onforminput="addHighScore()">
             </form>
         </section>
 

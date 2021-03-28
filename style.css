@@ -8,6 +8,9 @@ main {
     justify-content: center;
 }
 
+.hide {
+    display: 'none';
+}
 
 .mainBox {
     margin: 100px;
