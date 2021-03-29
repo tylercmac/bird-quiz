@@ -26,17 +26,16 @@
             <h2 id="quizQ">Quiz Question</h2>
             <ul id="questOpts">
             </ul>
-            <div id='rightOrWrong'>text goes here</div>
+            <p id='rightOrWrong'>text goes here</p>
         </section>
 
         <section class="mainBox" id="allDoneBox">
             <h2 id="allDoneH">All done!</h2>
             <p id="results">
-                Your final score is: 
             </p>
             <form id="initForm">
-                <label for="enterInit">Enter Initials:</label>
-                <input type="text" name="enterInit" id="enterInit" onforminput="addHighScore()">
+                Enter Initials: <input type="text" id="initials">
+                <input type="submit" value="submit" id="submitBtn">
             </form>
         </section>
 
