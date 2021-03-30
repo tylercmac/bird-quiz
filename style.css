@@ -1,9 +1,30 @@
 body {
-    background-color: lightgray;
+    background-color: #34454c;
     line-height: 1.3;
+    font-family: -webkit-pictograph;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+a#viewScore {
+    font-size: 125%;
+    color: white;
+    text-decoration: none;
+    font-style: italic;
+    margin: 20px;
+}
+
+div#timer {
+    margin: 20px;
+    color: white;
+    display: block;
 }
 
 main {    
+    padding: 10px;
     display: flex;
     justify-content: center;
 }
@@ -12,28 +33,141 @@ main {
     display: 'none';
 }
 
+img {
+    display: flex;
+    margin: 0, auto;
+    max-width: 400px;
+    padding-top: 30px;
+}
+
 .mainBox {
-    margin: 100px;
+    width: 60%;
+    height: 75%;
+    margin-bottom: 20px;
     background-color: white;
     border: 1px black solid;
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
-    align-items: center;
     max-width: 75%;
+    border: 8px solid lightblue;
+    border-radius: 25px;
+    box-shadow: 10px 5px 5px black;
+}
+
+#quizBox {
+    padding: 50px;
+}
+
+div#imgSpot {
+    text-align: -webkit-center;
+}
+
+p#rightOrWrong {
+    color: white;
+    font-size: 300%;
+    text-align: center;
+    font-style: italic;
+    display: flex;
+    justify-content: center;
 }
 
 h1 {
     font-size: 300%;
     padding: 50px;
+    font-style: italic;
+    text-align: center;
 }
 
+h3 {
+    margin: 15px, auto;
+    font-size: 225%;
+    margin-bottom: 20px;
+    font-style: italic;
+    text-align: center;
+}
+
+h3#allDoneH {
+    margin-top: 15px;
+}
+
+
 .mainBox p {
-    padding: 50px;
     font-size: 150%;
+    padding: 50px 150px;
+    text-align: center;
+    line-height: 2;
+}
+
+p#results {
+    font-size: 250%;
 }
 
 .btn {
     margin: 50px auto;
+    font-size: 200%;
+    background-color: lightblue;
+    border-radius: 10px;
+    box-shadow: 3px 2px 5px black;
 }
 
+button.li {
+    padding: 5px;
+    font-size: 150%;
+    background-color: lightblue;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 3px 2px 5px black;
+}
+
+ul#questOpts {
+    display: flex;
+    justify-content: space-around;
+}
+
+input#submitBtn {
+    padding: 5px;
+    font-size: 100%;
+    background-color: lightblue;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 3px 2px 5px black;
+}
+
+form#initForm {
+    padding: 20px;
+    text-align: center;
+}
+
+section#highScoreBox {
+    padding: 30px;
+}
+
+ul#highScoreL {
+    font-size: 125%;
+    text-align: -webkit-center;
+    border: 2px dotted black;
+    border-radius: 5px;
+    width: 30%;
+    align-self: center;
+    height: 100px;
+    box-shadow: 10px 5px 5px black;
+}
+
+button#goBack {
+    margin-bottom: 0px;
+}
+
+li.li {
+    margin: 10px auto;
+}
+
+.btn:hover {
+    opacity: .5;
+}
+input#submitBtn:hover {
+    opacity: .5;
+}
+button.li:hover {
+    opacity: .5;
+}

@@ -10,10 +10,10 @@ var startBox = document.querySelector('#startBox');
 var quizBox = document.querySelector('#quizBox');
 var questOpts = document.querySelector('#questOpts');
 var quizQ = document.querySelector('#quizQ');
-var ans1 = document.querySelector('#ans1')
-var ans2 = document.querySelector('#ans2')
-var ans3 = document.querySelector('#ans3')
-var ans4 = document.querySelector('#ans4')
+var ans1 = document.querySelector('#ans1');
+var ans2 = document.querySelector('#ans2');
+var ans3 = document.querySelector('#ans3');
+var ans4 = document.querySelector('#ans4');
 var allDoneBox = document.querySelector('#allDoneBox');
 var highScoreBox = document.querySelector('#highScoreBox');
 var startBtn = document.querySelector('#startBtn');
@@ -27,73 +27,113 @@ var results = document.querySelector('#results');
 var submitBtn = document.querySelector('#submitBtn');
 var initForm = document.querySelector('#initForm');
 var initials = document.querySelector('#initials');
+var imgSpot = document.querySelector('#imgSpot');
+
+var img1 = document.createElement('img');
+img1.src = 'https://www.allaboutbirds.org/guide/assets/photo/303809061-1280px.jpg';
+
+
+var img2 = document.createElement('img');
+img2.src = 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/60384771/1800';
 
 var timeLeft = 60;
 var playerScore = 0;
 var highScoreList = [];
 var quizQuestions = [
     {
-        question: 'what is bird?',
+        question: 'What is the largest bird in North America?',
         answers: [
-            {option: 'not bird', isCorrect: false },
-            {option: 'bird', isCorrect: true },
-            {option: 'not bird', isCorrect: false },
-            {option: 'not bird', isCorrect: false },
+            {option: 'Bald Eagle', isCorrect: false },
+            {option: 'California Condor', isCorrect: true },
+            {option: 'Turkey Vulture', isCorrect: false },
+            {option: 'Dark-Eyed Junco', isCorrect: false },
         ]
     },
     {
-        question: 'what is big bird?',
+        question: 'What is the purpose of Penguins\'\ black and white coloration?',
         answers: [
-            {option: 'big bird', isCorrect: true },
-            {option: 'not big bird', isCorrect: false },
-            {option: 'not big bird', isCorrect: false },
-            {option: 'not big bird', isCorrect: false },
+            {option: 'Underwater camoflauge', isCorrect: true },
+            {option: 'Thermal regulation', isCorrect: false },
+            {option: 'Identifier for others ', isCorrect: false },
+            {option: 'Because it\'\s cute', isCorrect: false },
         ]
     },
     {
-        question: 'what is smol bird?',
+        question: 'What is the top speed of a Peregrine Falcon?',
         answers: [
-            {option: 'not smol bird', isCorrect: false },
-            {option: 'not smol bird', isCorrect: false },
-            {option: 'not smol bird', isCorrect: false },
-            {option: 'smol bird', isCorrect: true },
+            {option: '100 mph', isCorrect: false },
+            {option: '50 mph', isCorrect: false },
+            {option: '180 mph', isCorrect: false },
+            {option: '240 mph', isCorrect: true },
         ]
     },
     {
-        question: 'what is quiet bird?',
+        question: 'How many species of birds are in the US?',
         answers: [
-            {option: 'not quiet bird', isCorrect: false },
-            {option: 'not quiet bird', isCorrect: false },
-            {option: 'not quiet bird', isCorrect: false },
-            {option: 'quiet bird', isCorrect: true },
+            {option: '104', isCorrect: false },
+            {option: '523', isCorrect: false },
+            {option: '2371', isCorrect: false },
+            {option: '1107', isCorrect: true },
         ]
     },
     {
-        question: 'what is loud bird?',
+        question: 'What is this bird?',
         answers: [
-            {option: 'not loud bird', isCorrect: false },
-            {option: 'not loud bird', isCorrect: false },
-            {option: 'loud bird', isCorrect: true },
-            {option: 'not loud bird', isCorrect: false },
-        ]
+            {option: 'American Robin', isCorrect: false },
+            {option: 'House Finch', isCorrect: false },
+            {option: 'Eastern Bluebird', isCorrect: true },
+            {option: 'Blue Jay', isCorrect: false },
+        ],
+        img: 1,
+    },
+    {
+        question: 'What is this bird?',
+        answers: [
+            {option: 'Osprey', isCorrect: false },
+            {option: 'Golden Eagle', isCorrect: false },
+            {option: 'Red-Tailed Hawk', isCorrect: true },
+            {option: 'Northern Harrier', isCorrect: false },
+        ],
+        img: 2,
+        
     }
 ]
 var currentIndex = 0;
 var highScores = [];
+var timesUpMsg = document.createElement('p');
+timesUpMsg.textContent = `Time's Up!`;
 
+img1.classList.add('flex');
+img2.classList.add('flex');
 
 startBtn.addEventListener('click', startGame);
 viewScore.addEventListener('click', function() {
+    if (timeLeft < 60 && timeLeft > -1) {
+        goBackBtn.addEventListener('click', function() {
+            highScoreBox.style.display = 'none';
+            quizBox.style.display = 'flex';
+            startBox.style.display = 'none';
+        })
+    } else {
+        goBackBtn.addEventListener('click', function() {
+            highScoreBox.style.display = 'none';
+            quizBox.style.display = 'none';
+            startBox.style.display = 'flex';
+        });
+    }
     startBox.style.display = 'none';
     quizBox.style.display = 'none';
     highScoreBox.style.display = 'flex';
     allDoneBox.style.display = 'none';
-
-})
+    
+});
 goBackBtn.addEventListener('click', function() {
     highScoreBox.style.display = 'none';
     startBox.style.display = 'flex';
-})
+});
+
+submitBtn.addEventListener('click', addHighScore);
+clearHS.addEventListener('click', clearHighScore);
 
 function shuffleQuestions(array) {
     for (i = array.length - 1; i > 0; i--) {
@@ -137,6 +177,8 @@ function startTimer() {
             clearInterval(timer);
             quizResults();
             timerBox.textContent = '';
+            allDoneBox.insertBefore(timesUpMsg, allDoneBox.childNodes[0]);
+
         }
         if (allDoneBox.style.display === 'flex') {
             clearInterval(timer);
@@ -146,7 +188,6 @@ function startTimer() {
     
 }
 
-
 function nextQuestion() {
     resetQuestion();
     displayQuestion(quizQuestions[currentIndex]);
@@ -154,8 +195,18 @@ function nextQuestion() {
 }
 
 function displayQuestion(question) {
+    while (imgSpot.firstChild) {
+        imgSpot.removeChild(imgSpot.firstChild)
+    }
     // populate quizq with new quiz question
     quizQ.textContent = question.question;
+    if (question.img === 1) {
+        imgSpot.classList.add('flex');
+        imgSpot.appendChild(img1);
+    } else if (question.img === 2) {
+        imgSpot.appendChild(img2);
+        imgSpot.classList.add('flex');
+    }
     // for every answer option, create a button with answer on it, assigning a true value to correct answer
     question.answers.forEach(answer => {
         let button = document.createElement('button');
@@ -176,16 +227,18 @@ function selectAnswer(event) {
     // if the target button contains correct answer, add one to player score and display correct answer.
     if (correct) {
         playerScore++;
-        rightOrWrong.style.display = 'flex';
+        rightOrWrong.style.display = 'block';
         rightOrWrong.textContent = 'Correct!';
+        rightOrWrong.style.cssText = 'color: lightgreen';
         setTimeout(function(){
             rightOrWrong.style.display = 'none';
         }, 1500);
         console.log('right!')
     }
     else {
-        rightOrWrong.style.display = 'flex';
-        rightOrWrong.textContent = 'Incorrect!';
+        rightOrWrong.style.display = 'block';
+        rightOrWrong.textContent = 'Incorrect! -10 seconds.';
+        rightOrWrong.style.cssText = 'color: red';
         timeLeft -= 10;
         setTimeout(function(){
             rightOrWrong.style.display = 'none';
@@ -215,31 +268,26 @@ function resetQuestion() {
 function quizResults() {
     quizBox.style.display = 'none';
     allDoneBox.style.display = 'flex';
+    highScoreBox.style.display = 'none';
     results.textContent = `Your final score is: ${playerScore}` 
-    // localStorage.setItem('currentPlayerScore', playerScore)
+    if (timeLeft > 0) {
+        allDoneBox.removeChild(timesUpMsg);
+    } 
 }
-
-submitBtn.addEventListener('click', addHighScore);
-clearHS.addEventListener('click', clearHighScore);
 
 function addHighScore(e) {
     e.preventDefault();
-    // localStorage.setItem('currPlayInit', initials.value);
+    timeLeft = 60;
+    highScoreL.style.display = 'flex';
     startBox.style.display = 'none';
     quizBox.style.display = 'none';
     allDoneBox.style.display = 'none';
     highScoreBox.style.display = 'flex';
     var currPlayInit = initials.value;
     var currentPlayerScore = playerScore;
-    // var currPlayInit = localStorage.getItem('currPlayInit');
-    // var currentPlayerScore = localStorage.getItem('currentPlayerScore');
-    console.log('submit button is working')
-    console.log(currPlayInit);
-    console.log(currentPlayerScore);
     highScoreList.push({name: currPlayInit, score: currentPlayerScore});
     localStorage.setItem('highScoreList', JSON.stringify(highScoreList));
     var officialHSList = JSON.parse(localStorage.getItem('highScoreList'))
-    console.log(highScoreList);
     console.log(officialHSList);
     while (highScoreL.firstChild) {
         highScoreL.removeChild(highScoreL.firstChild)
@@ -247,13 +295,11 @@ function addHighScore(e) {
     // create a list for each object in localstorage high score list, and display it on the page.
     officialHSList.forEach(namescore => {
         let list = document.createElement('li');
-        list.textContent = `Initials: ${namescore.name} Score: ${namescore.score}`;
+        list.textContent = `Initials: "${namescore.name}"    Score: ${namescore.score}`;
         list.classList.add('li')
 
         highScoreL.appendChild(list);
     })
-    
-    // localStorage.setItem('currentPlayerScore', 0)
 }
 
 // declares empty array, them swaps local high score list with empty array, and clears every list item in high score list on page.
@@ -262,6 +308,7 @@ function clearHighScore(e) {
     e.preventDefault();
     highScoreList =  emptyArr;
     console.log(highScoreList);
+    highScoreL.style.display = 'none';
     localStorage.setItem('highScoreList', emptyArr);
     while (highScoreL.firstChild) {
         highScoreL.removeChild(highScoreL.firstChild)

@@ -17,39 +17,40 @@
         <section class="mainBox" id="startBox">
             <h1 id="quizTitle">The Bird Quiz</h1>
             <p>
-                How familiar are you with our Avian friends? Find out by trying this quiz. No need to research, just wing it!
+                How familiar are you with our Avian friends? Find out by trying this quiz. You have one minute. No need to research, just wing it!
             </p>
             <button class="btn" id="startBtn">Start</button>
         </section>
 
         <section class="mainBox" id="quizBox">
-            <h2 id="quizQ">Quiz Question</h2>
+            <h3 id="quizQ">Quiz Question</h3>
             <ul id="questOpts">
             </ul>
-            <p id='rightOrWrong'>text goes here</p>
+            <div id="imgSpot"></div>
         </section>
-
+        
         <section class="mainBox" id="allDoneBox">
-            <h2 id="allDoneH">All done!</h2>
+            <h3 id="allDoneH">All done!</h3>
             <p id="results">
             </p>
             <form id="initForm">
                 Enter Initials: <input type="text" id="initials">
-                <input type="submit" value="submit" id="submitBtn">
+                <input type="submit" value="Submit" id="submitBtn">
             </form>
         </section>
 
         <section class="mainBox" id="highScoreBox">
-            <h2 id="highScoreT">High Scores:</h2>
+            <h3 id="highScoreT">High Scores:</h3>
             <ul id="highScoreL">
             
             </ul>
             <button class="btn" id="goBack">Go Back</button>
             <button class="btn" id="clearHS">Clear High Scores</button>
         </section>
-
-
+        
+        
     </main>
+    <p id='rightOrWrong'>text goes here</p>
     <script src="./script.js"></script>
 </body>
 </html>
