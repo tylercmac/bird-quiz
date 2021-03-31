@@ -1,10 +1,3 @@
-// if user clicks start
-    // quiz element shows
-    // timer starts countdown
-// when user selects
-
-
-
 var mainBox = document.querySelector('.mainBox');
 var startBox = document.querySelector('#startBox');
 var quizBox = document.querySelector('#quizBox');
@@ -15,6 +8,7 @@ var ans2 = document.querySelector('#ans2');
 var ans3 = document.querySelector('#ans3');
 var ans4 = document.querySelector('#ans4');
 var allDoneBox = document.querySelector('#allDoneBox');
+var allDoneH = document.querySelector('#allDoneH');
 var highScoreBox = document.querySelector('#highScoreBox');
 var startBtn = document.querySelector('#startBtn');
 var goBackBtn = document.querySelector('#goBack');
@@ -31,10 +25,10 @@ var imgSpot = document.querySelector('#imgSpot');
 
 var img1 = document.createElement('img');
 img1.src = 'https://www.allaboutbirds.org/guide/assets/photo/303809061-1280px.jpg';
-
-
 var img2 = document.createElement('img');
 img2.src = 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/60384771/1800';
+var img3 = document.createElement('img');
+img3.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/1280px-Mallard2.jpg';
 
 var timeLeft = 60;
 var playerScore = 0;
@@ -80,8 +74,8 @@ var quizQuestions = [
         question: 'What is this bird?',
         answers: [
             {option: 'American Robin', isCorrect: false },
-            {option: 'House Finch', isCorrect: false },
             {option: 'Eastern Bluebird', isCorrect: true },
+            {option: 'House Finch', isCorrect: false },
             {option: 'Blue Jay', isCorrect: false },
         ],
         img: 1,
@@ -96,31 +90,41 @@ var quizQuestions = [
         ],
         img: 2,
         
-    }
+    },
+    {
+        question: 'What is this bird?',
+        answers: [
+            {option: 'Mallard', isCorrect: true },
+            {option: 'Ruddy Duck', isCorrect: false },
+            {option: 'Great Egret', isCorrect: false },
+            {option: 'Lesser Green Broadbill', isCorrect: false },
+        ],
+        img: 3,
+        
+    },
+    {
+        question: 'What is a group of owls called?',
+        answers: [
+            {option: 'A seige', isCorrect: false },
+            {option: 'A parliament', isCorrect: true },
+            {option: 'A coronation', isCorrect: false },
+            {option: 'A bevy', isCorrect: false },
+        ],
+        
+    },
+
 ]
 var currentIndex = 0;
 var highScores = [];
 var timesUpMsg = document.createElement('p');
 timesUpMsg.textContent = `Time's Up!`;
+timesUpMsg.style = 'color: red; font-size: 200%';
 
 img1.classList.add('flex');
 img2.classList.add('flex');
 
 startBtn.addEventListener('click', startGame);
 viewScore.addEventListener('click', function() {
-    if (timeLeft < 60 && timeLeft > -1) {
-        goBackBtn.addEventListener('click', function() {
-            highScoreBox.style.display = 'none';
-            quizBox.style.display = 'flex';
-            startBox.style.display = 'none';
-        })
-    } else {
-        goBackBtn.addEventListener('click', function() {
-            highScoreBox.style.display = 'none';
-            quizBox.style.display = 'none';
-            startBox.style.display = 'flex';
-        });
-    }
     startBox.style.display = 'none';
     quizBox.style.display = 'none';
     highScoreBox.style.display = 'flex';
@@ -128,10 +132,16 @@ viewScore.addEventListener('click', function() {
     
 });
 goBackBtn.addEventListener('click', function() {
-    highScoreBox.style.display = 'none';
-    startBox.style.display = 'flex';
+    if (timeLeft < 60 && timeLeft > -1) {
+            highScoreBox.style.display = 'none';
+            quizBox.style.display = 'flex';
+            startBox.style.display = 'none';
+        } else {
+            highScoreBox.style.display = 'none';
+            quizBox.style.display = 'none';
+            startBox.style.display = 'flex';
+        };
 });
-
 submitBtn.addEventListener('click', addHighScore);
 clearHS.addEventListener('click', clearHighScore);
 
@@ -150,7 +160,8 @@ function init() {
     allDoneBox.style.display = 'none';
     highScoreBox.style.display = 'none';
     timer.style.display = 'none';
-    rightOrWrong.style.display = 'none';
+    rightOrWrong.style.display = 'flex';
+    rightOrWrong.textContent = '';
 }
 
 function startGame() {
@@ -177,8 +188,8 @@ function startTimer() {
             clearInterval(timer);
             quizResults();
             timerBox.textContent = '';
+            allDoneH.style.display = 'none';
             allDoneBox.insertBefore(timesUpMsg, allDoneBox.childNodes[0]);
-
         }
         if (allDoneBox.style.display === 'flex') {
             clearInterval(timer);
@@ -206,7 +217,10 @@ function displayQuestion(question) {
     } else if (question.img === 2) {
         imgSpot.appendChild(img2);
         imgSpot.classList.add('flex');
-    }
+    } else if (question.img === 3) {
+        imgSpot.appendChild(img3);
+        imgSpot.classList.add('flex');
+    } 
     // for every answer option, create a button with answer on it, assigning a true value to correct answer
     question.answers.forEach(answer => {
         let button = document.createElement('button');
@@ -227,21 +241,19 @@ function selectAnswer(event) {
     // if the target button contains correct answer, add one to player score and display correct answer.
     if (correct) {
         playerScore++;
-        rightOrWrong.style.display = 'block';
         rightOrWrong.textContent = 'Correct!';
-        rightOrWrong.style.cssText = 'color: lightgreen';
+        rightOrWrong.style.cssText = 'color: #0ce00c';
         setTimeout(function(){
-            rightOrWrong.style.display = 'none';
+            rightOrWrong.textContent = '';
         }, 1500);
         console.log('right!')
     }
     else {
-        rightOrWrong.style.display = 'block';
         rightOrWrong.textContent = 'Incorrect! -10 seconds.';
         rightOrWrong.style.cssText = 'color: red';
         timeLeft -= 10;
         setTimeout(function(){
-            rightOrWrong.style.display = 'none';
+            rightOrWrong.textContent = '';
         }, 1500);
         console.log('wrong!')
     }
@@ -277,17 +289,37 @@ function quizResults() {
 
 function addHighScore(e) {
     e.preventDefault();
-    timeLeft = 60;
-    highScoreL.style.display = 'flex';
+    if (initials.value === '') {
+        alert('You must enter your initials');
+        return;
+    }
+    allDoneH.style.display = 'flex';
+    highScoreL.style.display = 'block';
     startBox.style.display = 'none';
     quizBox.style.display = 'none';
     allDoneBox.style.display = 'none';
     highScoreBox.style.display = 'flex';
+    var currTime;
+    if (timeLeft < 0) {
+        currTime = 0;
+    } else {
+        currTime = timeLeft;
+    }
     var currPlayInit = initials.value;
     var currentPlayerScore = playerScore;
-    highScoreList.push({name: currPlayInit, score: currentPlayerScore});
+    highScoreList.push({name: currPlayInit, score: currentPlayerScore, time: currTime});
     localStorage.setItem('highScoreList', JSON.stringify(highScoreList));
-    var officialHSList = JSON.parse(localStorage.getItem('highScoreList'))
+    var officialHSList = JSON.parse(localStorage.getItem('highScoreList'));
+
+    //array methods - sort, map, reduce, filter
+
+    officialHSList.sort((a, b) => {
+        if (a.score > b.score) {
+            // -1 moves to left
+            return -1
+        }
+    });
+
     console.log(officialHSList);
     while (highScoreL.firstChild) {
         highScoreL.removeChild(highScoreL.firstChild)
@@ -295,11 +327,13 @@ function addHighScore(e) {
     // create a list for each object in localstorage high score list, and display it on the page.
     officialHSList.forEach(namescore => {
         let list = document.createElement('li');
-        list.textContent = `Initials: "${namescore.name}"    Score: ${namescore.score}`;
+        list.textContent = `Initials: "${namescore.name}" | Score: ${namescore.score} | Time Left: ${namescore.time}`;
         list.classList.add('li')
 
         highScoreL.appendChild(list);
     })
+    timeLeft = 60;
+    console.log(timeLeft);
 }
 
 // declares empty array, them swaps local high score list with empty array, and clears every list item in high score list on page.
@@ -316,4 +350,3 @@ function clearHighScore(e) {
 }
 
 init();
-

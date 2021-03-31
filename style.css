@@ -6,7 +6,8 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    height: 75px;
 }
 
 a#viewScore {
@@ -15,12 +16,14 @@ a#viewScore {
     text-decoration: none;
     font-style: italic;
     margin: 20px;
+    position: absolute;
+    left: 20px;
 }
 
 div#timer {
     margin: 20px;
-    color: white;
-    display: block;
+    color: orangered;
+    font-size: 150%;
 }
 
 main {    
@@ -36,67 +39,77 @@ main {
 img {
     display: flex;
     margin: 0, auto;
-    max-width: 400px;
-    padding-top: 30px;
+    max-width: 90%;
+    max-height: 20rem;
+    padding: 20px 0px;
 }
 
 .mainBox {
     width: 60%;
-    height: 75%;
+    min-height: 400px;
     margin-bottom: 20px;
     background-color: white;
-    border: 1px black solid;
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
-    max-width: 75%;
     border: 8px solid lightblue;
     border-radius: 25px;
     box-shadow: 10px 5px 5px black;
 }
 
 #quizBox {
-    padding: 50px;
+    padding: 25px;
 }
 
 div#imgSpot {
     text-align: -webkit-center;
 }
 
+div#r-or-w-box {
+    position: relative;
+    margin: 30px;
+}
+
 p#rightOrWrong {
-    color: white;
-    font-size: 300%;
+    font-size: 200%;
     text-align: center;
     font-style: italic;
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    left: 15rem;
+    line-height: 0;
+    margin: 0 auto;
+    padding: 0;
 }
 
 h1 {
+    font-weight: bold;
     font-size: 300%;
     padding: 50px;
     font-style: italic;
     text-align: center;
+    font-variant: petite-caps;
 }
 
 h3 {
-    margin: 15px, auto;
-    font-size: 225%;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    font-size: 305%;
     font-style: italic;
     text-align: center;
 }
 
 h3#allDoneH {
-    margin-top: 15px;
+    margin-top: 40px;
+    font-size: 300%;
+    justify-content: center;
 }
 
 
 .mainBox p {
     font-size: 150%;
-    padding: 50px 150px;
+    margin: 50px auto;
     text-align: center;
     line-height: 2;
+    padding: 10px;
 }
 
 p#results {
@@ -118,11 +131,18 @@ button.li {
     border-radius: 5px;
     margin: 20px;
     box-shadow: 3px 2px 5px black;
+    font-weight: bold;
 }
 
 ul#questOpts {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
+}
+
+h3#highScoreT {
+    margin: 20px;
 }
 
 input#submitBtn {
@@ -140,7 +160,7 @@ form#initForm {
 }
 
 section#highScoreBox {
-    padding: 30px;
+    padding: 20px;
 }
 
 ul#highScoreL {
@@ -148,9 +168,8 @@ ul#highScoreL {
     text-align: -webkit-center;
     border: 2px dotted black;
     border-radius: 5px;
-    width: 30%;
+    width: 50%;
     align-self: center;
-    height: 100px;
     box-shadow: 10px 5px 5px black;
 }
 
@@ -165,9 +184,26 @@ li.li {
 .btn:hover {
     opacity: .5;
 }
+
+.btn:active {
+    transform: scale(.95);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
 input#submitBtn:hover {
     opacity: .5;
 }
+
+input#submitBtn:active {
+    transform: scale(.95);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
 button.li:hover {
     opacity: .5;
+}
+
+button.li:active {
+    transform: scale(.95);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
